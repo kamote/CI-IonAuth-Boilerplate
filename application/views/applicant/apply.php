@@ -6,6 +6,7 @@
         <label class="control-label" for="first_name">First Name</label>
         <div class="controls">
             <input type="text" id="first_name" name="first_name" placeholder="First Name">
+            <?php echo form_error('first_name'); ?>
         </div>
     </div>
     <div class="form-actions">
