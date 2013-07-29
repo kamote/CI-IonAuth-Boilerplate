@@ -8,17 +8,9 @@ class Statik extends Static_Controller {
 	}
     
     public function apply() {
-        if($this->input->post()) {
-			//$this->form_validation->set_rules('username', 'Username', 'required|alpha_dash|is_unique[users.username]');
-			if ($this->form_validation->run() == true) {
-                10
-                20
-                
-                $this->session->set_flashdata("success", "");
-            } else {
-                $this->session->set_flashdata("error", "There was problem updating your profile. Please try again.");
-            }
-        }
+        $sdata = array();
+        $data['content'] = $this->load->view('applicant/'.__FUNCTION__, $sdata, true);
+        $this->render($data);
     }
 }
 
