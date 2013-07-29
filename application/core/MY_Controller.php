@@ -13,7 +13,7 @@ abstract class MY_Controller extends CI_Controller{
 		
 		if(!isset($this->baseLayout)) $this->baseLayout = 'default';
 		
-        $this->set_title('International', 'Blah Blah');
+        $this->set_title('Boiler Plate', 'Blah Blah');
 	}
 	
 	public function render($sections = array(), $template_name = null, $return = false) {
