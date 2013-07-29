@@ -9,6 +9,11 @@ class Applicant_model extends MY_Model {
                'rules' => 'required' )
     );
 
+    public $protected_attributes = array('id');
+    
+    protected $soft_delete = TRUE;
+    protected $return_type = 'array';
+
     function __construct() {
     	parent::__construct();
     }

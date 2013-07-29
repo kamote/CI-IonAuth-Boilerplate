@@ -12,7 +12,6 @@ class Statik extends Static_Controller {
         $this->load->model('applicant_model', 'Applicant');
 
         if($this->input->post()) {
-
             $applicant_data = array(
                 'first_name' => $this->input->post('first_name')
             );
