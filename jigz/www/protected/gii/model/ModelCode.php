@@ -6,7 +6,7 @@ class ModelCode extends CCodeModel
 	public $tablePrefix;
 	public $tableName;
 	public $modelClass;
-	public $modelPath='application.models';
+	public $modelPath='ci.application';
 	public $baseClass='CActiveRecord';
 	public $buildRelations=true;
 	public $commentsAsLabels=false;
@@ -33,7 +33,7 @@ class ModelCode extends CCodeModel
 			array('tableName', 'validateTableName', 'skipOnError'=>true),
 			array('tablePrefix, modelClass', 'match', 'pattern'=>'/^[a-zA-Z_]\w*$/', 'message'=>'{attribute} should only contain word characters.'),
 		    array('baseClass', 'match', 'pattern'=>'/^[a-zA-Z_][\w\\\\]*$/', 'message'=>'{attribute} should only contain word characters and backslashes.'),
-			array('modelPath', 'validateModelPath', 'skipOnError'=>true),
+			array('modelPath', 'validateModelPath', 'skipOnError'=>false),
 			array('baseClass, modelClass', 'validateReservedWord', 'skipOnError'=>true),
 			array('baseClass', 'validateBaseClass', 'skipOnError'=>true),
 			array('connectionId, tablePrefix, modelPath, baseClass, buildRelations, commentsAsLabels, softDelete, softDeleteField', 'sticky'),
@@ -115,8 +115,11 @@ class ModelCode extends CCodeModel
 				'relations'=>isset($this->relations[$className]) ? $this->relations[$className] : array(),
 				'connectionId'=>$this->connectionId,
 			);
+
+			//die($this->modelPath.Yii::getPathOfAlias('ci.application.models').'/'.$className.'.php');
 			$this->files[]=new CCodeFile(
-				Yii::getPathOfAlias($this->modelPath).'/'.$className.'.php',
+				//Yii::getPathOfAlias($this->modelPath).'/'.$className.'.php',
+				Yii::getPathOfAlias('ci.application.models').'/'.$className.'.php',
 				$this->render($templatePath.'/model.php', $params)
 			);
 		}
@@ -410,7 +413,15 @@ class ModelCode extends CCodeModel
 	protected function generateClassName($tableName)
 	{
 		if($this->tableName===$tableName || ($pos=strrpos($this->tableName,'.'))!==false && substr($this->tableName,$pos+1)===$tableName)
+		{
+			if($this->ci_model_ext != null)
+			{
+				return $this->modelClass.$this->ci_model_ext;
+			}
+
 			return $this->modelClass;
+		}
+			
 
 		$tableName=$this->removePrefix($tableName,false);
 		if(($pos=strpos($tableName,'.'))!==false) // remove schema part (e.g. remove 'public2.' from 'public2.post')

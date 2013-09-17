@@ -41,7 +41,7 @@ class <?php echo $modelClass.$this->ci_model_ext; ?> extends <?php echo $this->c
 	 * @return array relational rules.
 	*/
 <?php foreach($relations as $name=>$relation): ?>
-	public $<?php echo "$name => $relation"; ?>
+	public $<?php echo "$name => $relation"; ?>;
 <?php endforeach; ?>
 	
 
