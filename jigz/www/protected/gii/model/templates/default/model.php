@@ -20,7 +20,7 @@
  * @property <?php echo $column->type.' $'.$column->name."\n"; ?>
 <?php endforeach; ?>
  */
-class <?php echo $modelClass.$this->ci_model_ext; ?> extends <?php echo $this->ci_base_model."\n"; ?>
+class <?php echo $modelClass; ?> extends <?php echo $this->ci_base_model."\n"; ?>
 {
 	/**
      * This model's default database table. Automatically
